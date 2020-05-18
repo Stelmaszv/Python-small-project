@@ -1,23 +1,38 @@
 from django.test import TestCase,Client
 from django.urls import reverse,resolve
-from .views import List,Get,Create
+from .views import List,Get,Create,Update
 from .models import list_Model
 class TestTemplate(TestCase):
     def setUp(self):
         self.client=Client()
         self.list=reverse('main')
         self.get=reverse('Get', kwargs={"id":1})
+        self.update=reverse('update', kwargs={"id":1})
         self.create=reverse('create')
     def test_create(self):
         self.assertEquals(resolve(self.create).func.view_class, Create)
     def test_list(self):
         self.assertEquals(resolve(self.list).func.view_class,List)
-    def test_get_url(self):
+    def test_get(self):
         self.assertEquals(resolve(self.get).func.view_class,Get)
-    def test_list_templete(self):
+    def test_update(self):
+        self.assertEquals(resolve(self.get).func.view_class, Update)
+    def test_list_templete_status_code_and_Template_get(self):
         respanse = self.client.get(self.list)
         self.assertEquals(respanse.status_code,200)
         self.assertTemplateUsed(respanse, 'mian.html')
+    def test_update_templete_status_code_and_Template_get(self):
+        list_Model.objects.create(name='dqd')
+        respanse = self.client.get(self.list)
+        self.assertEquals(respanse.status_code, 200)
+        self.assertTemplateUsed(respanse, 'update.html')
+    def test_update_templete_status_code_and_Template_post(self):
+        data={
+            'name': 'fqef'
+        }
+        respanse = self.client.post(self.create,data)
+        self.model = list_Model.objects.get(id=1)
+        self.assertEquals(self.model.name, data.name)
     def test_create_templete_status_code_and_Template_get(self):
         respanse = self.client.get(self.create)
         self.assertEquals(respanse.status_code,200)
