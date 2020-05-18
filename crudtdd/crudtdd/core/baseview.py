@@ -54,7 +54,6 @@ class baseCreate(baseForm):
         return self.form(request.POST)
 class baseShowView(TemplateView):
     def get(self,request,*args,**kwargs):
-        self.id_ = self.kwargs.get("id")
         self.setContext(request)
         return render(request,self.template_name,self.context)
     def get_object(self):
