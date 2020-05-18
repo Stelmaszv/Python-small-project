@@ -3,10 +3,11 @@ from django.urls import reverse,resolve
 from .views import List,Get,Create,Update,Delete
 from .models import list_Model
 import json
+
 class Test_List(TestCase):
     def setUp(self):
         self.client=Client()
-        self.list=reverse('main')
+        self.list=reverse('crud:main')
     def test_list_url(self):
         self.assertEquals(resolve(self.list).func.view_class,List)
     def test_list_templete_status_code_and_Template_get(self):
@@ -14,10 +15,22 @@ class Test_List(TestCase):
         self.assertEquals(respanse.status_code,200)
         self.assertTemplateUsed(respanse, 'mian.html')
 
+class Test_read(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.get=reverse('crud:Get', kwargs={"id":1})
+    def test_get_url(self):
+        self.assertEquals(resolve(self.get).func.view_class,Get)
+    def test_get_status_code_and_Template(self):
+        list_Model.objects.create(name='dqd')
+        respanse = self.client.get(self.get)
+        self.assertTemplateUsed(respanse, 'get.html')
+        self.assertEquals(respanse.status_code, 200)
+
 class Test_Create(TestCase):
     def setUp(self):
         self.client=Client()
-        self.create=reverse('create')
+        self.create=reverse('crud:create')
     def test_create_url(self):
         self.assertEquals(resolve(self.create).func.view_class, Create)
     def test_create_templete_status_code_and_Template_get(self):
@@ -34,7 +47,7 @@ class Test_Create(TestCase):
 class Test_Update(TestCase):
     def setUp(self):
         self.client=Client()
-        self.update=reverse('update', kwargs={"id":1})
+        self.update=reverse('crud:update', kwargs={"id":1})
     def test_update_url(self):
         self.assertEquals(resolve(self.update).func.view_class, Update)
     def test_update_templete_status_code_and_Template_get(self):
@@ -50,11 +63,11 @@ class Test_Update(TestCase):
         respanse = self.client.post(self.update,data)
         self.model = list_Model.objects.get(id=1)
         self.assertEquals(respanse.status_code, 302)
-        
+
 class Test_Delete:
     def setUp(self):
         self.client=Client()
-        self.delete=reverse('delete', kwargs={"id":1})
+        self.delete=reverse('crud:delete', kwargs={"id":1})
     def test_delete_url(self):
         self.assertEquals(resolve(self.delete).func.view_class, Delete)
     def test_delete_action(self):
