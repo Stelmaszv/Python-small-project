@@ -53,7 +53,9 @@ class TestModel_list_Model(TestCase):
         list_Model.objects.create(name='dqd')
         self.model=list_Model.objects.get(id=1)
     def test_model_get_url(self):
-        self.assertEquals(self.model.model_url,'/get/1/')
+        self.assertEquals(self.model.get_url,'/get/1/')
+    def test_model_get_update_url(self):
+        self.assertEquals(self.model.update_url,'update/1/')
 
 
 
