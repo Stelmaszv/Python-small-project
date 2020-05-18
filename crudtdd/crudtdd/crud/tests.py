@@ -1,13 +1,15 @@
 from django.test import TestCase,Client
 from django.urls import reverse,resolve
-from .views import List,Get,Create,Update
+from .views import List,Get,Create,Update,Delete
 from .models import list_Model
+import json
 class TestTemplate(TestCase):
     def setUp(self):
         self.client=Client()
         self.list=reverse('main')
         self.get=reverse('Get', kwargs={"id":1})
         self.update=reverse('update', kwargs={"id":1})
+        self.delete=reverse('delete', kwargs={"id":1})
         self.create=reverse('create')
     def test_create(self):
         self.assertEquals(resolve(self.create).func.view_class, Create)
@@ -17,6 +19,15 @@ class TestTemplate(TestCase):
         self.assertEquals(resolve(self.get).func.view_class,Get)
     def test_update(self):
         self.assertEquals(resolve(self.update).func.view_class, Update)
+    def test_delete(self):
+        self.assertEquals(resolve(self.delete).func.view_class, Delete)
+    def test_delete_action(self):
+        list_Model.objects.create(name='dqd')
+        respanse = self.client.delete(self.delete,json.dumps({
+            'id':1
+        }))
+        self.assertEquals(respanse.status_code,204)
+        self.assertEquals(len(list_Model.objects.all()),0)
     def test_list_templete_status_code_and_Template_get(self):
         respanse = self.client.get(self.list)
         self.assertEquals(respanse.status_code,200)
@@ -56,6 +67,8 @@ class TestModel_list_Model(TestCase):
         self.assertEquals(self.model.get_url,'/get/1/')
     def test_model_get_update_url(self):
         self.assertEquals(self.model.update_url,'/update/1/')
+    def test_model_get_delete_url(self):
+        self.assertEquals(self.model.delete_url, '/delete/1/')
 
 
 
