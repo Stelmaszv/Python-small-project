@@ -26,7 +26,6 @@ class TestTemplate(TestCase):
         respanse = self.client.delete(self.delete,json.dumps({
             'id':1
         }))
-        self.assertEquals(respanse.status_code,204)
         self.assertEquals(len(list_Model.objects.all()),0)
     def test_list_templete_status_code_and_Template_get(self):
         respanse = self.client.get(self.list)

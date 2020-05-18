@@ -3,6 +3,9 @@ from django.urls import reverse
 class list_Model(models.Model):
     name=models.CharField(max_length=150)
     @property
+    def delete_url(self):
+        return reverse("delete", kwargs={"id": self.id})
+    @property
     def get_url(self):
         return reverse("Get", kwargs={"id":self.id})
     @property
