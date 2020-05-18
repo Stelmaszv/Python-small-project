@@ -1,0 +1,7 @@
+<div class="offset-2 col-8">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form  }}
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>
