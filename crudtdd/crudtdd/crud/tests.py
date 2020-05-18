@@ -55,7 +55,7 @@ class TestModel_list_Model(TestCase):
     def test_model_get_url(self):
         self.assertEquals(self.model.get_url,'/get/1/')
     def test_model_get_update_url(self):
-        self.assertEquals(self.model.update_url,'update/1/')
+        self.assertEquals(self.model.update_url,'/update/1/')
 
 
 
