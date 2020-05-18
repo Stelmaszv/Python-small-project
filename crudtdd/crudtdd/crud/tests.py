@@ -33,6 +33,12 @@ class TestTemplate(TestCase):
         respanse = self.client.get(self.get)
         self.assertTemplateUsed(respanse, 'get.html')
         self.assertEquals(respanse.status_code, 200)
+class TestModel_list_Model(TestCase):
+    def setUp(self) -> None:
+        list_Model.objects.create(name='dqd')
+        self.model=list_Model.objects.get(id=1)
+    def test_model_get_url(self):
+        self.assertEquals(self.modelur(),'get/1/')
 
 
 
