@@ -1,4 +1,4 @@
-from core.baseview import baseListView,baseShowView,baseCreate
+from core.baseview import baseListView,baseShowView,baseCreate,baseUpdateView
 from .models import list_Model
 from .forms import list_Form
 class List(baseListView):
@@ -13,6 +13,11 @@ class Get(baseShowView):
 class Create(baseCreate):
     template_name = 'create.html'
     form = list_Form
+    success_url = '/'
+class Update(baseUpdateView):
+    template_name = 'create.html'
+    form = list_Form
+    getObject = list_Model
     success_url = '/'
 
 
