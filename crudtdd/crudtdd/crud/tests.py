@@ -13,23 +13,24 @@ class Test_List(TestCase):
         respanse = self.client.get(self.list)
         self.assertEquals(respanse.status_code,200)
         self.assertTemplateUsed(respanse, 'mian.html')
+
 class Test_Create(TestCase):
     def setUp(self):
         self.client=Client()
         self.create=reverse('create')
     def test_create_url(self):
         self.assertEquals(resolve(self.create).func.view_class, Create)
-    def test_list_templete_status_code_and_Template_get(self):
+    def test_create_templete_status_code_and_Template_get(self):
         respanse = self.client.get(self.create)
-        self.assertEquals(respanse.status_code, 200)
+        self.assertEquals(respanse.status_code,200)
         self.assertTemplateUsed(respanse, 'create.html')
-    def test_update_templete_status_code_and_Template_post(self):
-        data={
-            'name': 'fqef'
-        }
-        respanse = self.client.post(self.create,data)
-        self.model = list_Model.objects.get(id=1)
-        self.assertEquals(respanse.status_code, 302)
+    def test_create_templete_status_code_and_Template_post(self):
+        respanse = self.client.post(self.create,{
+            'name':'fqef'
+        })
+        self.assertEquals(respanse.status_code,302)
+        self.assertEquals(len(list_Model.objects.all()),1)
+
 class Test_Update(TestCase):
     def setUp(self):
         self.client=Client()
@@ -49,6 +50,7 @@ class Test_Update(TestCase):
         respanse = self.client.post(self.update,data)
         self.model = list_Model.objects.get(id=1)
         self.assertEquals(respanse.status_code, 302)
+        
 class Test_Delete:
     def setUp(self):
         self.client=Client()
@@ -61,6 +63,7 @@ class Test_Delete:
             'id':1
         }))
         self.assertEquals(len(list_Model.objects.all()),0)
+
 class TestModel_list_Model(TestCase):
     def setUp(self) -> None:
         list_Model.objects.create(name='dqd')
