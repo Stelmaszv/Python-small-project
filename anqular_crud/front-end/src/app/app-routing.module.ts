@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListComponent } from './list/list.component';
-
-
+import { BaseComponent } from './base/base.component';
+import { AnqularStartComponent } from './anqular-start/anqular-start.component';
 const routes: Routes = [
-  { path:'list' , component:ListComponent}
+  { path:'AnqularStart' , component:AnqularStartComponent },
+  { path:'' , component:BaseComponent}
 ];
 
 @NgModule({
@@ -12,4 +12,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[ListComponent]
+export const routingComponents=[BaseComponent,AnqularStartComponent]
