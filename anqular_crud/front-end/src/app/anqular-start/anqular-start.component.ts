@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./anqular-start.component.sass']
 })
 export class AnqularStartComponent implements OnInit {
-
+  title = 'front-end';
   constructor() { }
 
   ngOnInit(): void {
