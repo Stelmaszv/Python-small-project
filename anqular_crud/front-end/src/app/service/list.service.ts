@@ -7,11 +7,11 @@ import { List_Model } from '../model/list'
   providedIn: 'root'
 })
 export class ListService {
-  list:string = 'https://jsonplaceholder.typicode.com/todos';
+  list:string = 'http://127.0.0.1:8000/list/';
   limit = '?_limit=5';
   constructor(private http:HttpClient) { }
   getList() :Observable<List_Model[]> {
-      return this.http.get<List_Model[]>(`${this.list}${this.limit}`)
+      return this.http.get<List_Model[]>(this.list)
   }
 
 }
