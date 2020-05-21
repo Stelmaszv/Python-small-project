@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Model } from  '../../model/list'
+import { ListService } from '../../service/list.service'
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -7,9 +8,13 @@ import { List_Model } from  '../../model/list'
 })
 export class ListComponent implements OnInit {
   list:List_Model[];
-  constructor() { }
+  constructor(private listService:ListService) { }
 
   ngOnInit(): void {
+    this.listService.getList().subscribe(items => {
+      console.log(items)
+      this.list=items
+    });
   }
 
 }
