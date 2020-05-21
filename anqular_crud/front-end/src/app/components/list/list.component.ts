@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { List_Model } from  '../../model/list'
-
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
