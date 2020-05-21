@@ -5,10 +5,13 @@ import { BaseComponent } from './components/base/base.component';
 import { ListComponent } from './components/list/list.component'
 import { CreateComponent } from './components/create/create.component';
 import { GetComponent } from './components/get/get.component';
+import { DeleteComponent } from './components/delete/delete.component';
 const routes: Routes = [
   { path:'' , component:ListComponent},
   { path:'create' , component: CreateComponent},
+  { path:'delete/:id' , component: DeleteComponent},
   { path:'item/:id' , component: GetComponent},
+  { path:'update/:id' , component: GetComponent},
 ];
 
 @NgModule({

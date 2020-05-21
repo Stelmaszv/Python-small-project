@@ -8,11 +8,13 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class GetComponent implements OnInit{
   item
+  id
   constructor(private listService:ListService,private route: ActivatedRoute) { }
   ngOnInit(): void {
-    this.get_Data(this.route.snapshot.params.id)
+    this.id=this.route.snapshot.params.id
+    this.get(this.route.snapshot.params.id)
   }
-  get_Data(id){
+  get(id){
     this.listService.get(id).subscribe(el => {
       this.item = el;
     });

@@ -4,10 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
   ],
   imports: [
     BrowserModule,
