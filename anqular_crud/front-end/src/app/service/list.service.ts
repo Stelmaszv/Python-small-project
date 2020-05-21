@@ -13,5 +13,8 @@ export class ListService {
   getList() :Observable<List_Model[]> {
       return this.http.get<List_Model[]>(this.list)
   }
-
+  get(id) :Observable<List_Model[]>{
+    const url=`${this.list}${id}`
+    return this.http.get<List_Model[]>(url)
+  }
 }

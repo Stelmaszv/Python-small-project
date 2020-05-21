@@ -8,7 +8,7 @@ import { GetComponent } from './components/get/get.component';
 const routes: Routes = [
   { path:'' , component:ListComponent},
   { path:'create' , component: CreateComponent},
-  { path:'list/:id' , component: GetComponent},
+  { path:'item/:id' , component: GetComponent},
 ];
 
 @NgModule({

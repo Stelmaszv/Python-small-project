@@ -1,6 +1,3 @@
-<p>list works!</p>
-hte4h
-
 <div *ngFor="let el of list;">
-    {{el.id}}
+    <a routerLink="/item/{{el.id}}" routerLinkActive="active"> {{el.name}}</a>
 </div>
