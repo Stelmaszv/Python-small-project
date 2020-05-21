@@ -17,4 +17,9 @@ export class ListService {
     const url=`${this.list}${id}`
     return this.http.get<List_Model[]>(url)
   }
+  add(form){
+    this.http.post(this.list,form).subscribe(item => {
+      console.log(item)
+    });
+  }
 }

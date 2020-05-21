@@ -1,7 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { ListService } from '../../service/list.service'
 import {ActivatedRoute} from '@angular/router';
-import { List_Model } from  '../../model/list'
 @Component({
   selector: 'app-get',
   templateUrl: './get.component.html',
@@ -15,7 +14,7 @@ export class GetComponent implements OnInit{
   }
   get_Data(id){
     this.listService.get(id).subscribe(el => {
-      this.item = el[];
+      this.item = el;
     });
   }
 
