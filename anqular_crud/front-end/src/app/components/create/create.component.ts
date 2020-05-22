@@ -14,7 +14,8 @@ export class CreateComponent{
   });
   constructor(private listService:ListService,private router: Router) { }
   onSubmit(){
-    this.listService.add(this.create.value)
-    this.router.navigate(['/']);
+    this.listService.add(this.create.value).subscribe(el => {
+      this.router.navigate(['/']);
+    });
   }
 }

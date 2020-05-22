@@ -15,7 +15,8 @@ export class DeleteComponent implements OnInit {
     this.delete(this.route.snapshot.params.id)
   }
   delete(id){
-    this.listService.delete(id)
-    this.router.navigate(['/']);
+    this.listService.delete(id).subscribe(el => {
+      this.router.navigate(['/']);
+    });
   }
 }

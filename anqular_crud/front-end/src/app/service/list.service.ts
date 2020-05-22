@@ -22,11 +22,11 @@ export class ListService {
     const url=`${this.list}${id}`
     return this.http.get<any>(url)
   }
-  add(form){
-    this.http.post(this.list,form)
+  add(form) :Observable<any>{
+    return this.http.post(this.list,form)
   }
-  delete(id){
-    const url=`${this.list}/${id}`
-    this.http.delete(url)
+  delete(id) :Observable<any>{
+    const url=`${this.list}${id}`
+    return this.http.delete(url)
   }
 }
