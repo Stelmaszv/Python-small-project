@@ -13,8 +13,8 @@ export class CreateComponent{
     name: new FormControl(''),
   });
   constructor(private listService:ListService,private router: Router) { }
-  onSubmit(){
-    this.listService.add(this.create.value).subscribe(el => {
+  public onSubmit(){
+    this.listService.add(this.create.value).subscribe(() => {
       this.router.navigate(['/']);
     });
   }

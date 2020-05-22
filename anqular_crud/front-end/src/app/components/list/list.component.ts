@@ -13,7 +13,7 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.getlist()
   }
-  getlist (){
+  private getlist () :any {
     this.listService.getList().subscribe(items => {
       this.list=items
     });

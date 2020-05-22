@@ -7,14 +7,14 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./get.component.sass']
 })
 export class GetComponent implements OnInit{
-  item
-  id
+  item:any
+  id:number
   constructor(private listService:ListService,private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.id=this.route.snapshot.params.id
     this.get(this.route.snapshot.params.id)
   }
-  get(id){
+  private get(id) : void{
     this.listService.get(id).subscribe(el => {
       this.item = el;
     });
