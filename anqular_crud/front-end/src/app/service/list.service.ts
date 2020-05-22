@@ -3,11 +3,6 @@ import {Observable} from 'rxjs'
 import { HttpClient,HttpHeaders } from '@angular/common/http'
 import { List_Model } from '../model/list'
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -18,15 +13,19 @@ export class ListService {
   getList() :Observable<List_Model[]> {
       return this.http.get<List_Model[]>(this.list)
   }
-  get(id) :Observable<any>{
+  get(id) :Observable<List_Model>{
     const url=`${this.list}${id}`
-    return this.http.get<any>(url)
+    return this.http.get<List_Model>(url)
   }
-  add(form) :Observable<any>{
-    return this.http.post(this.list,form)
+  add(form) :Observable<List_Model>{
+    return this.http.post<List_Model>(this.list,form)
   }
-  delete(id) :Observable<any>{
+  delete(id) :Observable<List_Model>{
     const url=`${this.list}${id}`
-    return this.http.delete(url)
+    return this.http.delete<List_Model>(url)
+  }
+  update(form,id) {
+    const url = `${this.list}${id}/`;
+    return this.http.put<List_Model>(url,form)
   }
 }

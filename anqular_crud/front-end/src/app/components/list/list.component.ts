@@ -11,8 +11,10 @@ export class ListComponent implements OnInit {
   constructor(private listService:ListService) { }
 
   ngOnInit(): void {
+    this.getlist()
+  }
+  getlist (){
     this.listService.getList().subscribe(items => {
-      console.log(items)
       this.list=items
     });
   }
